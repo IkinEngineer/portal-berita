@@ -44,20 +44,7 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'judul' => 'required',
-            'isi' => 'required',
-            'gambar' => 'required',
-            'tgl' => 'required',
-            'kategori_id' => 'required',
-        ], [
-            'judul.required' => 'Judul wajib diisi.',
-            'isi.required' => 'Isi berita wajib diisi.',
-            'gambar.required' => 'Gambar wajib dipilih.',
-            'tgl.required' => 'Tanggal wajib diisi.',
-            'kategori_id.required' => 'Kategori wajib dipilih.',
-        ]);
-
+        
         $image = $request->file('gambar')->store('images', 'public');
         $input = $request->all();
         $input['gambar'] = "$image";
