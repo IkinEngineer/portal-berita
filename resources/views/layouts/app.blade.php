@@ -13,9 +13,9 @@
             <a href="/" class="navbar-brand">Portal Berita</a>
             <div class="">
                 @if (session()->has('key'))
-                    <a class="btn btn-outline-secondary" href="">Logout</a>
+                    <a class="btn btn-outline-secondary" href="{{ url('logout') }}">Logout</a>
                 @else
-                    <a class="btn btn-outline-secondary"  href="/login">Login</a>
+                    <a class="btn btn-outline-secondary"  href="url('login')">Login</a>
                 @endif
             </div>
         </div>

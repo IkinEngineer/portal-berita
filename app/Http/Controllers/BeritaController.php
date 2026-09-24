@@ -18,6 +18,10 @@ class BeritaController extends Controller
     }
     public function index()
     {
+        if (!session()->has('key')) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+        
         $berita = Berita::all();
         return view('berita.index', compact('berita'));
     }
@@ -56,7 +60,7 @@ class BeritaController extends Controller
     public function show(string $id)
     {
         $berita = Berita::find($id);
-        return view('berita.detail', compact('berita'));
+        return view('detail', compact('berita'));
     }
 
     /**
