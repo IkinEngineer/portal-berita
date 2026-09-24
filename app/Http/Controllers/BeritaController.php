@@ -13,7 +13,7 @@ class BeritaController extends Controller
      */
     public function welcome()
     {
-        $berita = Berita::all();
+        $berita = Berita::latest()->get();
         return view('welcome', compact('berita'));
     }
     public function index()
@@ -22,7 +22,7 @@ class BeritaController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        $berita = Berita::all();
+        $berita = Berita::latest()->get();
         return view('berita.index', compact('berita'));
     }
 
