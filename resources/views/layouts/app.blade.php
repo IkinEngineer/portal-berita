@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}">
     <title>Dashboard</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
             <a href="/" class="navbar-brand">Portal Berita</a>
@@ -25,7 +25,7 @@
         @yield('content')
     </div>
 
-    <footer class="text-center">
+    <footer class="text-center mt-auto bg-light py-3">
         <p>&copy;LSP-2026 | Ainur Rozikin</p>
     </footer>
 </body>
