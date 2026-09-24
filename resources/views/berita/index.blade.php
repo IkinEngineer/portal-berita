@@ -21,13 +21,13 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $b->judul }}</td>
-                    <td><img src="{{ url('storage/'.$b->image) }}" alt="" style="width:50px"></td>
-                    <td>{{ $b->tanggal }}</td>
-                    <td>{{ $b->tanggal }}</td>
+                    <td><img src="{{ url('storage/'.$b->gambar) }}" alt="" style="width:50px"></td>
+                    <td>{{ $b->tgl }}</td>
+                    <td>{{ $b->kategori->nama_kategori }}</td>
                     <td class="d-flex gap-2">
                         <a href="{{ route('berita.show',$b->id) }}" class="btn btn-outline-primary">Detail</a>
                         <a href="{{ route('berita.edit',$b->id) }}" class="btn btn-outline-warning">Edit</a>
-                        <form action="{{ route(' berita.destroy', $b->id) }}" method="post">
+                        <form action="{{ route('berita.destroy', $b->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <input type="submit" class="btn btn-outline-danger" value="delete" onclick="return confirm('yakin ingin dihapus?')">
@@ -35,7 +35,7 @@
                     </td>
                 </tr>
                 @empty
-                    
+    
                 @endforelse
             </tbody>
         </table>

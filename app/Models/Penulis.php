@@ -10,6 +10,5 @@ class Penulis extends Model
         'nama',
         'email',
         'password',
-        'role'
     ];
 }

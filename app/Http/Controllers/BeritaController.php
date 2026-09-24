@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Berita;
-use App\Models\Penulis;
+use App\Models\kategori;
 
 class BeritaController extends Controller
 {
@@ -27,7 +27,12 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        return view('berita.create');
+        if (!session()->has('key')) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        $kategori = Kategori::all();
+        return view('berita.create', compact('kategori'));
     }
 
     /**
@@ -35,9 +40,9 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-        $image = $request->file('image')->store('images','public');
+        $image = $request->file('gambar')->store('images', 'public');
         $input = $request->all();
-        $input['image'] = "$image";
+        $input['gambar'] = "$image";
         $input['penulis_id'] = session('key.0.id');
 
         Berita::create($input);
@@ -59,8 +64,14 @@ class BeritaController extends Controller
      */
     public function edit(string $id)
     {
-        $berita = Berita::find($id);
-        return view('berita.edit', compact('berita'));
+        if (!session()->has('key')) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        $berita = Berita::findOrFail($id);
+        $kategori = Kategori::all();
+
+        return view('berita.edit', compact('berita', 'kategori'));
     }
 
     /**
@@ -70,19 +81,18 @@ class BeritaController extends Controller
     {
         $berita = Berita::find($id);
 
-        if ($request->hasFile('image')){
-            $image = $request->file('image')->store('images','public');
-            $berita->image = $image;
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file('gambar')->store('images', 'public');
+            $berita->gambar = $gambar;
         }
 
         $berita->judul = $request->judul;
-        $berita->konten = $request->konten;
-        $berita->tanggal = $request->tanggal;
+        $berita->isi = $request->isi;
+        $berita->tgl = $request->tgl;
         $berita->save();
 
-        return redirect()->route('berita.index')->with('success','');
-
-        }
+        return redirect()->route('berita.index')->with('success', '');
+    }
 
     /**
      * Remove the specified resource from storage.

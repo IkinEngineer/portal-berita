@@ -6,13 +6,23 @@
                 <h3>Tambah Berita</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('berita.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{route('berita.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <input type="text" name="judul" placeholder="Masukkan Judul" class="form-control mb-2" required id="">
-                    <textarea name="konten" class="form-control cols-30 rows-10 mb-2 " placeholder="Masukkan Konten"></textarea>
-                    <input type="file" name="image" placeholder="Masukkan Gambar" class="form-control mb-2" required>
-                    <input type="date" name="tanggal" placeholder="Masukkan tanggal" class="form-control mb-2" required>
-                    <button type="submit" class="btn btn-secondary">Tambah</button>
+                    <input class="form-control mb-3" type="text" name="judul" id="" placeholder="Judul" required>
+                    <textarea class="form-control mb-3" name="isi" id="" cols="30" rows="10" placeholder="isi berita disini....."></textarea>
+                    <input class="form-control mb-3" type="file" name="gambar" id="" required>
+                    <input class="form-control mb-3" type="date" name="tgl" id="" required>
+                    <select class="form-control mb-3" name="kategori_id" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        @foreach ($kategori as $item)
+                            <option value="{{ $item->id }}">
+                                {{ $item->nama_kategori }}
+                            </option>
+                        @endforeach
+                    </select>
+
+
+                    <button class="btn btn-primary form-control " type="submit">Tambah</button>
                 </form>
             </div>
         </div>
