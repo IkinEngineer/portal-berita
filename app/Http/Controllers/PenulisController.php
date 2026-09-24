@@ -28,18 +28,6 @@ class PenulisController extends Controller
         return redirect('/login');
     }
 
-    public function registrasiform()
-    {
-        return view('register');
-    }
-
-    public function register(Request $request)
-    {
-        $penulis = Penulis::create($request->all());
-        return redirect('/login')->with('success');
-
-    }
-
     public function logout()
     {
         session()->flush();
